@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { Lock, Zap, CreditCard, Monitor } from "lucide-react";
 
 const features = [
-  { icon: Lock, title: "Secure Payment Gateway", desc: "Industry-standard encryption keeps every transaction safe." },
-  { icon: Zap, title: "Instant Activation", desc: "Extensions activate the moment your payment clears." },
-  { icon: CreditCard, title: "Easy Checkout", desc: "A streamlined process with minimal steps." },
-  { icon: Monitor, title: "Multi-device Compatible", desc: "Use your extensions across all your devices seamlessly." },
+  { icon: Lock, title: "Secure & Licensed", desc: "Every extension is verified, secure, and comes with a valid license." },
+  { icon: Zap, title: "Instant Digital Delivery", desc: "No waiting — your extension is delivered and activated immediately." },
+  { icon: CreditCard, title: "Simple Checkout", desc: "A streamlined purchase flow with multiple payment options." },
+  { icon: Monitor, title: "Cross-Browser Support", desc: "Use extensions across Chrome, Firefox, Edge, and more." },
 ];
 
 const FeaturesSection = () => (
@@ -17,9 +17,9 @@ const FeaturesSection = () => (
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Yiion?</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Choose Yiion Extensions?</h2>
         <p className="text-muted-foreground max-w-xl mx-auto">
-          Built for speed, security, and simplicity.
+          Premium digital extensions built for speed, security, and simplicity.
         </p>
       </motion.div>
 
