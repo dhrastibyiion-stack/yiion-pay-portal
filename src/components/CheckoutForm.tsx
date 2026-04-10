@@ -66,16 +66,34 @@ const CheckoutForm = () => {
                 <p className="text-2xl font-bold text-primary">{extension.price}</p>
               </div>
             </div>
-            <div className="mt-4 pt-4 border-t border-border flex justify-end">
+            <div className="mt-4 pt-4 border-t border-border flex flex-wrap gap-3 justify-end">
               <Button
                 variant="outline"
                 size="sm"
-                className="text-muted-foreground hover:text-destructive"
+                asChild
+              >
+                <Link to={`/extension/${extId}`}>
+                  View Details
+                </Link>
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
                 asChild
               >
                 <Link to="/#extensions">
+                  Change Extension
+                </Link>
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="text-destructive border-destructive/30 hover:bg-destructive/10 hover:text-destructive"
+                asChild
+              >
+                <Link to="/">
                   <X className="w-4 h-4 mr-1" />
-                  Cancel & Choose Another
+                  Cancel
                 </Link>
               </Button>
             </div>

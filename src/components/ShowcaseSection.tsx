@@ -135,13 +135,23 @@ const ShowcaseSection = () => (
               <span className="font-bold text-primary">{ext.price}</span>
             </div>
 
-            <Button
-              asChild
-              size="sm"
-              className="w-full bg-hero text-primary-foreground hover:opacity-90 transition-opacity"
-            >
-              <a href="#checkout">Get Extension</a>
-            </Button>
+            <div className="flex gap-3">
+              <Button
+                asChild
+                size="sm"
+                variant="outline"
+                className="flex-1"
+              >
+                <Link to={`/extension/${ext.id}`}>View Details</Link>
+              </Button>
+              <Button
+                asChild
+                size="sm"
+                className="flex-1 bg-hero text-primary-foreground hover:opacity-90 transition-opacity"
+              >
+                <Link to={`/?ext=${ext.id}#checkout`}>Buy Now</Link>
+              </Button>
+            </div>
           </motion.div>
         ))}
       </div>
