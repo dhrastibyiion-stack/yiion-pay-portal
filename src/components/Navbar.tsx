@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const links = [
   { label: "Home", href: "#home" },
+  { label: "Explore", href: "#extensions" },
   { label: "Features", href: "#features" },
-  { label: "Pricing", href: "#pricing" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -16,9 +17,9 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
       <div className="container flex items-center justify-between h-16">
-        <a href="#home" className="font-display text-xl font-bold text-primary">
-          Yiion<span className="text-accent">.</span>
-        </a>
+        <Link to="/" className="font-display text-xl font-bold text-primary">
+          Yiion Extensions<span className="text-accent">.</span>
+        </Link>
 
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">

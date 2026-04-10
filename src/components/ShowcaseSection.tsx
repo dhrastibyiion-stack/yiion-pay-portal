@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,7 @@ import extData from "@/assets/ext-data.png";
 
 const extensions = [
   {
+    id: "secureguard-pro",
     name: "SecureGuard Pro",
     category: "Security",
     desc: "Advanced threat protection with real-time malware blocking and safe browsing alerts.",
@@ -22,6 +24,7 @@ const extensions = [
     featured: true,
   },
   {
+    id: "speedboost",
     name: "SpeedBoost",
     category: "Productivity",
     desc: "Supercharge your workflow with tab management, shortcuts, and focus mode.",
@@ -32,6 +35,7 @@ const extensions = [
     featured: false,
   },
   {
+    id: "privacyvault",
     name: "PrivacyVault",
     category: "Privacy",
     desc: "Block trackers, hide your digital fingerprint, and browse anonymously.",
@@ -42,6 +46,7 @@ const extensions = [
     featured: false,
   },
   {
+    id: "themecraft",
     name: "ThemeCraft",
     category: "Customization",
     desc: "Personalize any website with custom themes, fonts, and color palettes.",
@@ -52,6 +57,7 @@ const extensions = [
     featured: false,
   },
   {
+    id: "devinspect",
     name: "DevInspect",
     category: "Developer Tools",
     desc: "Enhanced inspector, network monitor, and performance profiling for developers.",
@@ -62,6 +68,7 @@ const extensions = [
     featured: true,
   },
   {
+    id: "cloudsync",
     name: "CloudSync",
     category: "Data Management",
     desc: "Seamlessly sync bookmarks, settings, and data across all your browsers.",
