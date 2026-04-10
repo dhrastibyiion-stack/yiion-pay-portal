@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { Search, ShoppingCart, ShieldCheck, Zap } from "lucide-react";
 
 const steps = [
-  { icon: Search, title: "Choose Extension", desc: "Browse our curated marketplace" },
-  { icon: ShoppingCart, title: "Add to Cart", desc: "Select your plan and add to cart" },
-  { icon: ShieldCheck, title: "Secure Payment", desc: "Pay safely with encrypted checkout" },
-  { icon: Zap, title: "Instant Activation", desc: "Start using immediately after purchase" },
+  { icon: Search, title: "Browse Extensions", desc: "Explore our marketplace of digital extensions" },
+  { icon: ShoppingCart, title: "Select & Purchase", desc: "Pick your plan and check out securely" },
+  { icon: ShieldCheck, title: "Instant Delivery", desc: "Get your extension license key instantly" },
+  { icon: Zap, title: "Activate & Use", desc: "Install and start using across all your devices" },
 ];
 
 const AboutSection = () => (
@@ -17,9 +17,9 @@ const AboutSection = () => (
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">Get Your Extension in Minutes</h2>
         <p className="text-muted-foreground max-w-xl mx-auto mb-16">
-          Get your extension up and running in four simple steps.
+          From discovery to activation — a seamless digital experience.
         </p>
       </motion.div>
 

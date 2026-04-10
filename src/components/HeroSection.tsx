@@ -17,11 +17,12 @@ const HeroSection = () => (
           Trusted by 10,000+ users
         </span>
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-          Fast & Secure Payment for Your{" "}
-          <span className="text-gradient">Extensions</span>
+          Premium Digital{" "}
+          <span className="text-gradient">Extensions</span>{" "}
+          for Every Browser
         </h1>
         <p className="text-lg text-muted-foreground mb-8 max-w-lg">
-          Buy and activate your browser extensions in seconds with Yiion's secure payment platform.
+          Discover, purchase, and instantly activate powerful browser extensions that boost your productivity, security, and browsing experience.
         </p>
         <div className="flex flex-wrap gap-4">
           <Button asChild size="lg" className="bg-hero text-primary-foreground hover:opacity-90 transition-opacity text-base px-8">
