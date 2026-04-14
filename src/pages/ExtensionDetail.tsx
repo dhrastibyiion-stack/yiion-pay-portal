@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Star, Check, Download, Shield, Zap, Eye, Palette, Code, Cloud, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -28,6 +31,7 @@ interface Extension {
   benefits: string[];
   features: string[];
   screenshots: string[];
+  pricingPlans?: { name: string; badge: string; badgeColor: string; price: string; period: string; features: string[]; popular: boolean }[];
 }
 
 const extensionsData: Record<string, Extension> = {
@@ -87,7 +91,36 @@ const extensionsData: Record<string, Extension> = {
       "One-click data capture",
       "Lightweight and fast performance"
     ],
-    screenshots: []
+    screenshots: [],
+    pricingPlans: [
+      {
+        name: "Starter",
+        badge: "BASIC",
+        badgeColor: "bg-muted text-muted-foreground",
+        price: "₹2,000",
+        period: "/yr",
+        features: ["200 Leads year", "Direct Page Extraction", "Standard Business Support"],
+        popular: false,
+      },
+      {
+        name: "Bronze Pro",
+        badge: "MOST POPULAR",
+        badgeColor: "bg-hero text-primary-foreground",
+        price: "₹5,000",
+        period: "/yr",
+        features: ["700 Total Leads", "Priority Multi-Filters", "Premium Priority Support", "Advanced Matching"],
+        popular: true,
+      },
+      {
+        name: "Gold",
+        badge: "ULTIMATE",
+        badgeColor: "bg-accent text-accent-foreground",
+        price: "₹10,000",
+        period: "/yr",
+        features: ["1250 Total Leads", "All Advanced Filters", "24/7 VIP Dedicated Support", "Bulk Export Tools"],
+        popular: false,
+      },
+    ],
   },
   "privacyvault": {
     id: "privacyvault",
