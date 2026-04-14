@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ArrowLeft, Star, Check, Download, Shield, Zap, Eye, Palette, Code, Cloud, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -28,6 +29,7 @@ interface Extension {
   benefits: string[];
   features: string[];
   screenshots: string[];
+  pricingPlans?: { name: string; badge: string; badgeColor: string; price: string; period: string; features: string[]; popular: boolean }[];
 }
 
 const extensionsData: Record<string, Extension> = {
@@ -87,7 +89,36 @@ const extensionsData: Record<string, Extension> = {
       "One-click data capture",
       "Lightweight and fast performance"
     ],
-    screenshots: []
+    screenshots: [],
+    pricingPlans: [
+      {
+        name: "Starter",
+        badge: "BASIC",
+        badgeColor: "bg-muted text-muted-foreground",
+        price: "₹2,000",
+        period: "/yr",
+        features: ["200 Leads year", "Direct Page Extraction", "Standard Business Support"],
+        popular: false,
+      },
+      {
+        name: "Bronze Pro",
+        badge: "MOST POPULAR",
+        badgeColor: "bg-hero text-primary-foreground",
+        price: "₹5,000",
+        period: "/yr",
+        features: ["700 Total Leads", "Priority Multi-Filters", "Premium Priority Support", "Advanced Matching"],
+        popular: true,
+      },
+      {
+        name: "Gold",
+        badge: "ULTIMATE",
+        badgeColor: "bg-accent text-accent-foreground",
+        price: "₹10,000",
+        period: "/yr",
+        features: ["1250 Total Leads", "All Advanced Filters", "24/7 VIP Dedicated Support", "Bulk Export Tools"],
+        popular: false,
+      },
+    ],
   },
   "privacyvault": {
     id: "privacyvault",
@@ -368,6 +399,44 @@ const ExtensionDetail = () => {
               </div>
             </motion.div>
           </div>
+
+          {extension.pricingPlans && extension.pricingPlans.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="mt-16"
+            >
+              <h2 className="text-3xl font-bold mb-2 text-center text-primary">Premium Plans</h2>
+              <p className="text-muted-foreground text-center mb-8">Unlock unlimited extractions with our specialized plans</p>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                {extension.pricingPlans.map((plan, i) => (
+                  <Card key={plan.name} className={`h-full flex flex-col ${plan.popular ? 'border-accent shadow-card-hover scale-105' : ''}`}>
+                    <CardHeader className="text-center">
+                      <Badge className={`${plan.badgeColor} border-0 w-fit mx-auto mb-2`}>
+                        {plan.badge}
+                      </Badge>
+                      <CardTitle className="text-xl">{plan.name}</CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex-1 text-center">
+                      <div className="mb-6">
+                        <span className="text-4xl font-bold">{plan.price}</span>
+                        <span className="text-muted-foreground">{plan.period}</span>
+                      </div>
+                      <ul className="space-y-3 text-left">
+                        {plan.features.map((feature) => (
+                          <li key={feature} className="flex items-center gap-2 text-sm">
+                            <Check className="w-4 h-4 text-accent flex-shrink-0" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </motion.div>
+          )}
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
