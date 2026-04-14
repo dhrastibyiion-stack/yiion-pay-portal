@@ -1,9 +1,11 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Star, Check, Download, Shield, Zap, Eye, Palette, Code, Cloud, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
@@ -254,6 +256,7 @@ const ExtensionDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const extension = id ? extensionsData[id] : null;
+  const [selectedPlan, setSelectedPlan] = useState<string>("");
 
   if (!extension) {
     return (
@@ -272,11 +275,7 @@ const ExtensionDetail = () => {
     <div className="min-h-screen">
       <Navbar />
       
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="pt-24 pb-16"
-      >
+      <div className="pt-24 pb-16">
         <div className="container">
           <Button
             variant="ghost"
@@ -288,11 +287,7 @@ const ExtensionDetail = () => {
           </Button>
 
           <div className="grid lg:grid-cols-2 gap-12">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-            >
+            <div>
               <div className="relative">
                 <div className="w-full aspect-square max-w-md mx-auto rounded-3xl bg-gradient-to-br from-primary/10 via-accent/10 to-primary/10 flex items-center justify-center overflow-hidden glow">
                   <img
@@ -307,14 +302,9 @@ const ExtensionDetail = () => {
                   </Badge>
                 )}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="flex flex-col"
-            >
+            <div className="flex flex-col">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center">
                   <CategoryIcon className="w-5 h-5 text-primary" />
@@ -338,129 +328,158 @@ const ExtensionDetail = () => {
                 </div>
               </div>
 
-              <div className="bg-card rounded-2xl p-6 shadow-card mb-8">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <p className="text-sm text-muted-foreground mb-1">Price</p>
-                    <p className="text-3xl font-bold text-primary">{extension.price}</p>
+              {extension.pricingPlans && extension.pricingPlans.length > 0 ? (
+                <div className="bg-card rounded-2xl p-6 shadow-card">
+                  <p className="text-sm text-muted-foreground mb-4">Select a plan:</p>
+                  <div className="space-y-3 mb-6">
+                    {extension.pricingPlans.map((plan) => (
+                      <div 
+                        key={plan.name} 
+                        onClick={() => setSelectedPlan(plan.name)}
+                        className={`flex items-center justify-between p-4 border rounded-xl cursor-pointer transition-all ${selectedPlan === plan.name ? 'border-accent bg-accent/10' : 'hover:bg-accent/5'}`}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${selectedPlan === plan.name ? 'border-accent' : 'border-muted-foreground'}`}>
+                            {selectedPlan === plan.name && <div className="w-2.5 h-2.5 rounded-full bg-accent" />}
+                          </div>
+                          <Label className="cursor-pointer font-medium">
+                            {plan.name} - {plan.price}{plan.period}
+                          </Label>
+                        </div>
+                        <Badge className={`${plan.badgeColor} border-0`}>
+                          {plan.badge}
+                        </Badge>
+                      </div>
+                    ))}
                   </div>
                   <Button
                     size="lg"
-                    className="bg-hero text-primary-foreground hover:opacity-90 transition-opacity gap-2 px-8"
+                    className="w-full bg-hero text-primary-foreground hover:opacity-90 transition-opacity gap-2"
+                    disabled={!selectedPlan}
                     asChild
                   >
-                    <a href={`/?ext=${extension.id}#checkout`}>
+                    <Link to={`/?ext=${extension.id}&plan=${encodeURIComponent(selectedPlan)}#checkout`}>
                       <Download className="w-5 h-5" />
                       Buy Now
-                    </a>
+                    </Link>
                   </Button>
                 </div>
-                <p className="text-sm text-muted-foreground">
-                  30-day money-back guarantee • Cancel anytime
-                </p>
-              </div>
-            </motion.div>
+              ) : (
+                <div className="bg-card rounded-2xl p-6 shadow-card">
+                  <div className="flex items-center justify-between">
+                    <Button
+                      size="lg"
+                      className="bg-hero text-primary-foreground hover:opacity-90 transition-opacity gap-2 px-8"
+                      asChild
+                    >
+                      <Link to={`/?ext=${extension.id}#checkout`}>
+                        <Download className="w-5 h-5" />
+                        Buy Now
+                      </Link>
+                    </Button>
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-4">
+                    30-day money-back guarantee • Cancel anytime
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
 
-          <div className="mt-16 grid md:grid-cols-2 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <h2 className="text-2xl font-bold mb-6">Key Benefits</h2>
-              <div className="space-y-4">
-                {extension.benefits.map((benefit, i) => (
-                  <div key={i} className="flex items-start gap-3 p-4 bg-card rounded-xl shadow-card">
-                    <div className="w-6 h-6 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-4 h-4 text-accent" />
-                    </div>
-                    <span className="text-foreground">{benefit}</span>
+          <div className="mt-12">
+            <div className="bg-card rounded-3xl p-8 md:p-12 shadow-card border border-primary/20">
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3">
+                <Zap className="w-8 h-8 text-accent" />
+                Key Features
+              </h2>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {extension.features.map((feature, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-r from-secondary/40 to-secondary/20 border border-secondary"
+                  >
+                    <Check className="w-6 h-6 text-accent flex-shrink-0" />
+                    <span className="font-medium text-lg">{feature}</span>
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-            >
-              <h2 className="text-2xl font-bold mb-6">Features</h2>
-              <div className="space-y-4">
-                {extension.features.map((feature, i) => (
-                  <div key={i} className="flex items-start gap-3 p-4 bg-card rounded-xl shadow-card">
-                    <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-4 h-4 text-primary" />
-                    </div>
-                    <span className="text-foreground">{feature}</span>
+            <div className="mt-8 bg-gradient-to-br from-accent/10 via-card to-primary/5 rounded-3xl p-8 md:p-12 shadow-card border border-accent/20">
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3">
+                <Shield className="w-8 h-8 text-accent" />
+                Why Choose This Extension
+              </h2>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {extension.benefits.map((benefit, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 p-4 rounded-xl bg-card/70 border border-secondary"
+                  >
+                    <Star className="w-6 h-6 fill-accent text-accent flex-shrink-0" />
+                    <span className="font-medium text-lg">{benefit}</span>
                   </div>
                 ))}
               </div>
-            </motion.div>
-          </div>
+            </div>
 
-          {extension.pricingPlans && extension.pricingPlans.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.35 }}
-              className="mt-16"
-            >
-              <h2 className="text-3xl font-bold mb-2 text-center text-primary">Premium Plans</h2>
-              <p className="text-muted-foreground text-center mb-8">Unlock unlimited extractions with our specialized plans</p>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-                {extension.pricingPlans.map((plan, i) => (
-                  <Card key={plan.name} className={`h-full flex flex-col ${plan.popular ? 'border-accent shadow-card-hover scale-105' : ''}`}>
-                    <CardHeader className="text-center">
-                      <Badge className={`${plan.badgeColor} border-0 w-fit mx-auto mb-2`}>
-                        {plan.badge}
-                      </Badge>
-                      <CardTitle className="text-xl">{plan.name}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-1 text-center">
-                      <div className="mb-6">
-                        <span className="text-4xl font-bold">{plan.price}</span>
-                        <span className="text-muted-foreground">{plan.period}</span>
-                      </div>
-                      <ul className="space-y-3 text-left">
-                        {plan.features.map((feature) => (
-                          <li key={feature} className="flex items-center gap-2 text-sm">
-                            <Check className="w-4 h-4 text-accent flex-shrink-0" />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                ))}
+            {extension.pricingPlans && extension.pricingPlans.length > 0 && (
+              <div className="mt-8">
+                <h2 className="text-2xl md:text-3xl font-bold mb-8 flex items-center gap-3">
+                  <Zap className="w-8 h-8 text-accent" />
+                  Pricing Plans
+                </h2>
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {extension.pricingPlans.map((plan, i) => (
+                    <motion.div
+                      key={plan.name}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.1 }}
+                    >
+                      <Card className={`h-full flex flex-col ${plan.popular ? 'border-accent shadow-card-hover' : ''}`}>
+                        <CardHeader className="text-center">
+                          <Badge className={`${plan.badgeColor} border-0 w-fit mx-auto mb-2`}>
+                            {plan.badge}
+                          </Badge>
+                          <CardTitle className="text-xl">{plan.name}</CardTitle>
+                          <CardDescription>{plan.name === "Starter" ? "Perfect for individual users" : plan.name === "Bronze Pro" ? "Best for power users" : "For teams and organizations"}</CardDescription>
+                        </CardHeader>
+                        <CardContent className="flex-1 text-center">
+                          <div className="mb-6">
+                            <span className="text-4xl font-bold">{plan.price}</span>
+                            <span className="text-muted-foreground">{plan.period}</span>
+                          </div>
+                          <ul className="space-y-3 text-left">
+                            {plan.features.map((feature, idx) => (
+                              <li key={idx} className="flex items-center gap-2 text-sm">
+                                <Check className="w-4 h-4 text-accent flex-shrink-0" />
+                                <span>{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </CardContent>
+                        <CardFooter>
+                          <Button
+                            className={`w-full ${plan.popular ? 'bg-hero text-primary-foreground hover:opacity-90' : ''}`}
+                            onClick={() => {
+                              setSelectedPlan(plan.name);
+                              document.getElementById('checkout')?.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                          >
+                            Select Plan
+                          </Button>
+                        </CardFooter>
+                      </Card>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-            </motion.div>
-          )}
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="mt-16 bg-gradient-to-br from-primary/10 via-accent/5 to-primary/10 rounded-3xl p-8 md:p-12 text-center"
-          >
-            <h2 className="text-3xl font-bold mb-4">Ready to get started?</h2>
-            <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
-              Join thousands of users who trust {extension.name} to enhance their browsing experience.
-            </p>
-            <Button
-              size="lg"
-              className="bg-hero text-primary-foreground hover:opacity-90 transition-opacity gap-2 px-10"
-              asChild
-            >
-              <a href={`/?ext=${extension.id}#checkout`}>
-                <Download className="w-5 h-5" />
-                Buy {extension.name} Now
-              </a>
-            </Button>
-          </motion.div>
+            )}
+          </div>
         </div>
-      </motion.div>
+      </div>
 
       <Footer />
     </div>
