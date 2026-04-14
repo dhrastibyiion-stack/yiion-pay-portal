@@ -4,8 +4,7 @@ import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-import extSecurity from "@/assets/ext-security.png";
-import extProductivity from "@/assets/ext-productivity.png";
+import extIndiamart from "@/assets/ext-indiamart.png";
 import extPrivacy from "@/assets/ext-privacy.png";
 import extCustom from "@/assets/ext-custom.png";
 import extDevtools from "@/assets/ext-devtools.png";
