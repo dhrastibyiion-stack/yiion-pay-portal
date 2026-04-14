@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-import extSecurity from "@/assets/ext-security.png";
 import extProductivity from "@/assets/ext-productivity.png";
 import extPrivacy from "@/assets/ext-privacy.png";
 import extCustom from "@/assets/ext-custom.png";
@@ -30,61 +29,61 @@ interface Extension {
 }
 
 const extensionsData: Record<string, Extension> = {
-  "secureguard-pro": {
-    id: "secureguard-pro",
-    name: "SecureGuard Pro",
-    category: "Security",
-    shortDesc: "Advanced threat protection with real-time malware blocking and safe browsing alerts.",
-    fullDesc: "SecureGuard Pro provides comprehensive browser security with advanced threat detection, real-time malware blocking, and intelligent safe browsing alerts. Protect your digital life with military-grade encryption and proactive threat prevention that works silently in the background.",
-    price: "$4.99/mo",
-    rating: 4.9,
-    users: "12K+",
-    image: extSecurity,
+  "indiamart-lead-extractor": {
+    id: "indiamart-lead-extractor",
+    name: "IndiaMART Lead Extractor",
+    category: "Tools",
+    shortDesc: "Export and manage leads directly from IndiaMART platform with ease.",
+    fullDesc: "IndiaMART Lead Extractor Pro is a powerful Chrome extension that helps businesses extract, organize, and export leads directly from the IndiaMART platform with ease. With one-click extraction and seamless Excel export, it eliminates manual data entry and ensures you never lose valuable customer information. Designed for sales teams, marketers, and business owners, it helps you manage leads efficiently and stay productive.",
+    price: "$3.99/mo",
+    rating: 4.7,
+    users: "500+",
+    image: extProductivity,
     featured: true,
     benefits: [
-      "Real-time malware detection and blocking",
-      "Safe browsing with phishing protection",
-      "Automatic security updates",
-      "Secure password manager integration",
-      "Encrypted browsing sessions",
-      "24/7 threat monitoring"
+      "One-click lead extraction from IndiaMART",
+      "Export leads directly to Excel",
+      "Avoid duplicate entries automatically",
+      "Saves time and reduces manual work",
+      "Organized and structured data storage",
+      "Improves productivity and workflow"
     ],
     features: [
-      "Advanced firewall protection",
-      "DNS leak prevention",
-      "WebRTC leak protection",
-      "HTTPS enforcement",
-      "Cookie management",
-      "Tracker blocking"
+      "Lead data extraction (Name, Contact, Inquiry details)",
+      "Excel/CSV export functionality",
+      "Duplicate lead detection and removal",
+      "Secure local data storage",
+      "Bulk lead extraction support",
+      "Clean and user-friendly interface"
     ],
     screenshots: []
   },
-  "speedboost": {
-    id: "speedboost",
-    name: "SpeedBoost",
+  "indiamart-lead-picker": {
+    id: "indiamart-lead-picker",
+    name: "IndiaMART Lead Picker",
     category: "Productivity",
-    shortDesc: "Supercharge your workflow with tab management, shortcuts, and focus mode.",
-    fullDesc: "SpeedBoost is your ultimate productivity companion. Organize tabs with visual groups, use keyboard shortcuts for everything, and enter focus mode to eliminate distractions. Save time with automated workflows and boost your daily productivity.",
-    price: "$3.99/mo",
-    rating: 4.7,
-    users: "8K+",
+    shortDesc: "Smart Chrome extension to automate lead management on IndiaMART. Instantly accept leads, extract customer details, and manage inquiries efficiently.",
+    fullDesc: "IndiaMART Lead Picker Pro is a smart Chrome extension designed to automate lead management on IndiaMART. It helps businesses instantly accept leads, extract customer details, and manage inquiries efficiently without manual effort. Boost your response speed, never miss a potential customer, and streamline your sales workflow with intelligent automation and real-time lead capture.",
+    price: "$4.99/mo",
+    rating: 4.8,
+    users: "1.5K+",
     image: extProductivity,
-    featured: false,
+    featured: true,
     benefits: [
-      "Visual tab grouping and organization",
-      "Custom keyboard shortcuts",
-      "Focus mode for deep work",
-      "Quick search across tabs",
-      "Automatic tab休眠",
-      "Session saving and restoration"
+      "Real-time lead auto-accept system",
+      "Faster response to customer inquiries",
+      "Reduces manual work and human error",
+      "Easy extraction of customer details",
+      "Improves lead conversion rate",
+      "Organized lead management dashboard"
     ],
     features: [
-      "Tab bookmarks",
-      "Pinned tabs",
-      "Tab history",
-      "Bulk tab operations",
-      "Workpace isolation",
-      "Productivity metrics"
+      "Automatic lead acceptance",
+      "Customer data extraction (Name, Contact, Requirement)",
+      "Bulk lead handling support",
+      "Smart filtering for targeted leads",
+      "One-click data capture",
+      "Lightweight and fast performance"
     ],
     screenshots: []
   },

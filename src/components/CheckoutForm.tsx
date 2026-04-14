@@ -11,7 +11,7 @@ const paymentMethods = ["Card", "UPI", "Net Banking"] as const;
 
 const extensionPrices: Record<string, { name: string; price: string }> = {
   "secureguard-pro": { name: "SecureGuard Pro", price: "$4.99/mo" },
-  "speedboost": { name: "SpeedBoost", price: "$3.99/mo" },
+  "indiamart-lead-picker": { name: "IndiaMART Lead Picker", price: "$4.99/mo" },
   "privacyvault": { name: "PrivacyVault", price: "$5.99/mo" },
   "themecraft": { name: "ThemeCraft", price: "$2.99/mo" },
   "devinspect": { name: "DevInspect", price: "$6.99/mo" },
