@@ -2,27 +2,37 @@ import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 const plans = [
   {
     name: "Starter",
-    price: "$9",
+    badge: "BASIC",
+    badgeColor: "bg-muted text-muted-foreground",
+    price: "₹2,000",
+    period: "/yr",
     description: "Perfect for individual users",
-    features: ["1 Browser Extension", "Basic Support", "Standard Features", "30-day License"],
+    features: ["200 Leads year", "Direct Page Extraction", "Standard Business Support"],
     popular: false,
   },
   {
-    name: "Pro",
-    price: "$29",
+    name: "Bronze Pro",
+    badge: "MOST POPULAR",
+    badgeColor: "bg-hero text-primary-foreground",
+    price: "₹5,000",
+    period: "/yr",
     description: "Best for power users",
-    features: ["3 Browser Extensions", "Priority Support", "Advanced Features", "1-year License", "Cross-browser Sync"],
+    features: ["700 Total Leads", "Priority Multi-Filters", "Premium Priority Support", "Advanced Matching"],
     popular: true,
   },
   {
-    name: "Business",
-    price: "$79",
+    name: "Gold",
+    badge: "ULTIMATE",
+    badgeColor: "bg-accent text-accent-foreground",
+    price: "₹10,000",
+    period: "/yr",
     description: "For teams and organizations",
-    features: ["Unlimited Extensions", "24/7 Dedicated Support", "All Premium Features", "Lifetime License", "Team Management", "API Access"],
+    features: ["1250 Total Leads", "All Advanced Filters", "24/7 VIP Dedicated Support", "Bulk Export Tools"],
     popular: false,
   },
 ];
@@ -36,9 +46,9 @@ const PricingSection = () => (
         viewport={{ once: true }}
         className="text-center mb-16"
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-primary">Premium Plans</h2>
         <p className="text-muted-foreground max-w-xl mx-auto">
-          Choose the plan that fits your needs. No hidden fees.
+          Unlock unlimited extractions with our specialized plans
         </p>
       </motion.div>
 
@@ -51,20 +61,20 @@ const PricingSection = () => (
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
           >
-            <Card className={`h-full flex flex-col ${plan.popular ? 'border-accent shadow-card-hover' : ''}`}>
-              <CardHeader>
-                {plan.popular && (
-                  <span className="text-xs font-medium text-accent mb-2">Most Popular</span>
-                )}
+            <Card className={`h-full flex flex-col ${plan.popular ? 'border-accent shadow-card-hover scale-105' : ''}`}>
+              <CardHeader className="text-center">
+                <Badge className={`${plan.badgeColor} border-0 w-fit mx-auto mb-2`}>
+                  {plan.badge}
+                </Badge>
                 <CardTitle className="text-xl">{plan.name}</CardTitle>
                 <CardDescription>{plan.description}</CardDescription>
               </CardHeader>
-              <CardContent className="flex-1">
+              <CardContent className="flex-1 text-center">
                 <div className="mb-6">
                   <span className="text-4xl font-bold">{plan.price}</span>
-                  <span className="text-muted-foreground">/one-time</span>
+                  <span className="text-muted-foreground">{plan.period}</span>
                 </div>
-                <ul className="space-y-3">
+                <ul className="space-y-3 text-left">
                   {plan.features.map((feature) => (
                     <li key={feature} className="flex items-center gap-2 text-sm">
                       <Check className="w-4 h-4 text-accent flex-shrink-0" />
