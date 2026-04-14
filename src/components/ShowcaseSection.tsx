@@ -19,7 +19,7 @@ const extensions = [
     price: "$3.99/mo",
     rating: 4.7,
     users: "500+",
-    image: extProductivity,
+    image: extIndiamart,
     featured: true,
   },
   {
@@ -30,7 +30,7 @@ const extensions = [
     price: "$4.99/mo",
     rating: 4.8,
     users: "1.5K+",
-    image: extProductivity,
+    image: extIndiamart,
     featured: true,
   },
   {
