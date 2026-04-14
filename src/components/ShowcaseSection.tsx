@@ -4,7 +4,8 @@ import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-import extIndiamart from "@/assets/ext-indiamart.png";
+import extSecurity from "@/assets/ext-security.png";
+import extProductivity from "@/assets/ext-productivity.png";
 import extPrivacy from "@/assets/ext-privacy.png";
 import extCustom from "@/assets/ext-custom.png";
 import extDevtools from "@/assets/ext-devtools.png";
@@ -21,7 +22,7 @@ const extensions = [
     price: "$3.99/mo",
     rating: 4.7,
     users: "500+",
-    image: extProductivity,
+    image: indiamartExtractor,
     featured: true,
   },
   {
@@ -32,7 +33,7 @@ const extensions = [
     price: "$4.99/mo",
     rating: 4.8,
     users: "1.5K+",
-    image: extProductivity,
+    image: indiamartPicker,
     featured: true,
   },
   {
