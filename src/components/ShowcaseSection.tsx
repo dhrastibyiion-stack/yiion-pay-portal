@@ -11,7 +11,7 @@ import extCustom from "@/assets/ext-custom.png";
 import extDevtools from "@/assets/ext-devtools.png";
 import extData from "@/assets/ext-data.png";
 import indiamartExtractorLogo from "@/assets/indiamart-extractor-logo.png";
-import indiamartPicker from "@/assets/indiamart-picker.svg";
+import indiamartPickerLogo from "@/assets/indiamart-picker-logo.png";
 
 const extensions = [
   {
@@ -33,7 +33,7 @@ const extensions = [
     price: "Free",
     rating: 4.8,
     users: "1.5K+",
-    image: indiamartPicker,
+    image: indiamartPickerLogo,
     featured: true,
   },
   {
