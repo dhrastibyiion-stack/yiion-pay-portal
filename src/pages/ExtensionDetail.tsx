@@ -11,6 +11,8 @@ import extPrivacy from "@/assets/ext-privacy.png";
 import extCustom from "@/assets/ext-custom.png";
 import extDevtools from "@/assets/ext-devtools.png";
 import extData from "@/assets/ext-data.png";
+import indiamartExtractor from "@/assets/indiamart-extractor.svg";
+import indiamartPicker from "@/assets/indiamart-picker.svg";
 
 interface Extension {
   id: string;
@@ -38,7 +40,7 @@ const extensionsData: Record<string, Extension> = {
     price: "$3.99/mo",
     rating: 4.7,
     users: "500+",
-    image: extProductivity,
+    image: indiamartExtractor,
     featured: true,
     benefits: [
       "One-click lead extraction from IndiaMART",
@@ -67,7 +69,7 @@ const extensionsData: Record<string, Extension> = {
     price: "$4.99/mo",
     rating: 4.8,
     users: "1.5K+",
-    image: extProductivity,
+    image: indiamartPicker,
     featured: true,
     benefits: [
       "Real-time lead auto-accept system",

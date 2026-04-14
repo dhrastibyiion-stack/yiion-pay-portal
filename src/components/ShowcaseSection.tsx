@@ -10,6 +10,8 @@ import extPrivacy from "@/assets/ext-privacy.png";
 import extCustom from "@/assets/ext-custom.png";
 import extDevtools from "@/assets/ext-devtools.png";
 import extData from "@/assets/ext-data.png";
+import indiamartExtractor from "@/assets/indiamart-extractor.svg";
+import indiamartPicker from "@/assets/indiamart-picker.svg";
 
 const extensions = [
   {
@@ -20,7 +22,7 @@ const extensions = [
     price: "$3.99/mo",
     rating: 4.7,
     users: "500+",
-    image: extProductivity,
+    image: indiamartExtractor,
     featured: true,
   },
   {
@@ -31,7 +33,7 @@ const extensions = [
     price: "$4.99/mo",
     rating: 4.8,
     users: "1.5K+",
-    image: extProductivity,
+    image: indiamartPicker,
     featured: true,
   },
   {
@@ -111,7 +113,7 @@ const ShowcaseSection = () => (
               </Badge>
             )}
 
-            <div className="w-16 h-16 rounded-2xl bg-secondary flex items-center justify-center mb-5 overflow-hidden group-hover:scale-110 transition-transform duration-300">
+            <div className={`rounded-2xl flex items-center justify-center mb-5 overflow-hidden group-hover:scale-110 transition-transform duration-300 w-16 h-16 bg-secondary`}>
               <img
                 src={ext.image}
                 alt={ext.name}
