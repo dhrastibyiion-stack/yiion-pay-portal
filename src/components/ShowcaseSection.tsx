@@ -10,7 +10,7 @@ import extPrivacy from "@/assets/ext-privacy.png";
 import extCustom from "@/assets/ext-custom.png";
 import extDevtools from "@/assets/ext-devtools.png";
 import extData from "@/assets/ext-data.png";
-import indiamartExtractor from "@/assets/indiamart-extractor.svg";
+import indiamartExtractorLogo from "@/assets/indiamart-extractor-logo.png";
 import indiamartPicker from "@/assets/indiamart-picker.svg";
 
 const extensions = [
@@ -19,10 +19,10 @@ const extensions = [
     name: "IndiaMART Lead Extractor",
     category: "Tools",
     desc: "Export and manage leads directly from IndiaMART platform. One-click extraction with Excel export and duplicate detection.",
-    price: "$3.99/mo",
+    price: "Free",
     rating: 4.7,
     users: "500+",
-    image: indiamartExtractor,
+    image: indiamartExtractorLogo,
     featured: true,
   },
   {
@@ -30,7 +30,7 @@ const extensions = [
     name: "IndiaMART Lead Picker",
     category: "Productivity",
     desc: "Smart Chrome extension to automate lead management on IndiaMART. Instantly accept leads, extract customer details, and manage inquiries efficiently.",
-    price: "$4.99/mo",
+    price: "Free",
     rating: 4.8,
     users: "1.5K+",
     image: indiamartPicker,
@@ -41,7 +41,7 @@ const extensions = [
     name: "PrivacyVault",
     category: "Privacy",
     desc: "Block trackers, hide your digital fingerprint, and browse anonymously.",
-    price: "$5.99/mo",
+    price: "Free",
     rating: 4.8,
     users: "15K+",
     image: extPrivacy,
@@ -52,7 +52,7 @@ const extensions = [
     name: "ThemeCraft",
     category: "Customization",
     desc: "Personalize any website with custom themes, fonts, and color palettes.",
-    price: "$2.99/mo",
+    price: "Free",
     rating: 4.6,
     users: "6K+",
     image: extCustom,
@@ -63,7 +63,7 @@ const extensions = [
     name: "DevInspect",
     category: "Developer Tools",
     desc: "Enhanced inspector, network monitor, and performance profiling for developers.",
-    price: "$6.99/mo",
+    price: "Free",
     rating: 4.9,
     users: "10K+",
     image: extDevtools,
@@ -74,7 +74,7 @@ const extensions = [
     name: "CloudSync",
     category: "Data Management",
     desc: "Seamlessly sync bookmarks, settings, and data across all your browsers.",
-    price: "$3.49/mo",
+    price: "Free",
     rating: 4.5,
     users: "9K+",
     image: extData,

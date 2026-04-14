@@ -11,7 +11,7 @@ import extPrivacy from "@/assets/ext-privacy.png";
 import extCustom from "@/assets/ext-custom.png";
 import extDevtools from "@/assets/ext-devtools.png";
 import extData from "@/assets/ext-data.png";
-import indiamartExtractor from "@/assets/indiamart-extractor.svg";
+import indiamartExtractorLogo from "@/assets/indiamart-extractor-logo.png";
 import indiamartPicker from "@/assets/indiamart-picker.svg";
 
 interface Extension {
@@ -37,10 +37,10 @@ const extensionsData: Record<string, Extension> = {
     category: "Tools",
     shortDesc: "Export and manage leads directly from IndiaMART platform with ease.",
     fullDesc: "IndiaMART Lead Extractor Pro is a powerful Chrome extension that helps businesses extract, organize, and export leads directly from the IndiaMART platform with ease. With one-click extraction and seamless Excel export, it eliminates manual data entry and ensures you never lose valuable customer information. Designed for sales teams, marketers, and business owners, it helps you manage leads efficiently and stay productive.",
-    price: "$3.99/mo",
+    price: "Free",
     rating: 4.7,
     users: "500+",
-    image: indiamartExtractor,
+    image: indiamartExtractorLogo,
     featured: true,
     benefits: [
       "One-click lead extraction from IndiaMART",
@@ -66,7 +66,7 @@ const extensionsData: Record<string, Extension> = {
     category: "Productivity",
     shortDesc: "Smart Chrome extension to automate lead management on IndiaMART. Instantly accept leads, extract customer details, and manage inquiries efficiently.",
     fullDesc: "IndiaMART Lead Picker Pro is a smart Chrome extension designed to automate lead management on IndiaMART. It helps businesses instantly accept leads, extract customer details, and manage inquiries efficiently without manual effort. Boost your response speed, never miss a potential customer, and streamline your sales workflow with intelligent automation and real-time lead capture.",
-    price: "$4.99/mo",
+    price: "Free",
     rating: 4.8,
     users: "1.5K+",
     image: indiamartPicker,
@@ -95,7 +95,7 @@ const extensionsData: Record<string, Extension> = {
     category: "Privacy",
     shortDesc: "Block trackers, hide your digital fingerprint, and browse anonymously.",
     fullDesc: "PrivacyVault gives you complete control over your digital footprint. Block invasive trackers, mask your fingerprint, and browse with complete anonymity. Your data stays private with military-grade encryption and zero-knowledge architecture.",
-    price: "$5.99/mo",
+    price: "Free",
     rating: 4.8,
     users: "15K+",
     image: extPrivacy,
@@ -124,7 +124,7 @@ const extensionsData: Record<string, Extension> = {
     category: "Customization",
     shortDesc: "Personalize any website with custom themes, fonts, and color palettes.",
     fullDesc: "ThemeCraft transforms your browsing experience with endless customization options. Apply stunning themes to any website, customize fonts and colors, and create your perfect visual environment. Express yourself with complete design control.",
-    price: "$2.99/mo",
+    price: "Free",
     rating: 4.6,
     users: "6K+",
     image: extCustom,
@@ -153,7 +153,7 @@ const extensionsData: Record<string, Extension> = {
     category: "Developer Tools",
     shortDesc: "Enhanced inspector, network monitor, and performance profiling for developers.",
     fullDesc: "DevInspect supercharges your development workflow with powerful browser developer tools. Monitor network requests in real-time, profile performance bottlenecks, and inspect elements with advanced capabilities. Built for developers who demand more.",
-    price: "$6.99/mo",
+    price: "Free",
     rating: 4.9,
     users: "10K+",
     image: extDevtools,
@@ -182,7 +182,7 @@ const extensionsData: Record<string, Extension> = {
     category: "Data Management",
     shortDesc: "Seamlessly sync bookmarks, settings, and data across all your browsers.",
     fullDesc: "CloudSync keeps your browsing data perfectly synchronized across all your devices and browsers. Never lose a bookmark again with automatic cloud backup, cross-device sync, and secure encrypted storage for all your browsing data.",
-    price: "$3.49/mo",
+    price: "Free",
     rating: 4.5,
     users: "9K+",
     image: extData,
