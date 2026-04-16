@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const paymentMethods = ["Card", "UPI", "Net Banking"] as const;
+const paymentMethods = ["Card", "UPI", "Net Banking", "Cash"] as const;
 
 const extensionPrices: Record<string, { name: string; price: string; category: string; hasPlans?: boolean; plans?: { name: string; price: string; period: string }[] }> = {
   "indiamart-lead-extractor": { name: "IndiaMART Lead Extractor", price: "Free", category: "Tools" },
