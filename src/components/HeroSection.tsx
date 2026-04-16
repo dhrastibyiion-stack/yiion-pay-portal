@@ -29,7 +29,7 @@ const HeroSection = () => (
             <a href="#extensions">Get Started</a>
           </Button>
           <Button asChild variant="outline" size="lg" className="text-base px-8">
-            <a href="#about">Learn More</a>
+            <a href="#features">Learn More</a>
           </Button>
         </div>
       </motion.div>
