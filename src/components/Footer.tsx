@@ -25,16 +25,20 @@ const Footer = () => (
           </ul>
         </div>
         <div>
-          <h4 className="font-semibold mb-3">Follow Us</h4>
-          <div className="flex gap-3">
-            {["Twitter", "LinkedIn", "GitHub"].map((s) => (
-              <span
-                key={s}
-                className="px-3 py-1.5 rounded-lg bg-secondary text-secondary-foreground text-xs font-medium hover:bg-primary hover:text-primary-foreground transition-colors cursor-pointer"
-              >
-                {s}
-              </span>
-            ))}
+          <h4 className="font-semibold mb-3">Legal</h4>
+          <div className="flex flex-col gap-2">
+            <Link
+              to="/terms-conditions"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              Terms & Conditions
+            </Link>
+            <Link
+              to="/privacy-policy"
+              className="text-sm text-muted-foreground hover:text-primary transition-colors"
+            >
+              Privacy Policy
+            </Link>
           </div>
         </div>
       </div>
