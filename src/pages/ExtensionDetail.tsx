@@ -271,6 +271,19 @@ const ExtensionDetail = () => {
                             Buy Now
                           </Link>
                         </Button>
+                        {extension.id === "indiamart-lead-extractor" && (
+                          <Button
+                            size="lg"
+                            variant="outline"
+                            className="gap-2 px-8 border-primary text-primary hover:bg-primary/10"
+                            asChild
+                          >
+                            <a href="https://chromewebstore.google.com/detail/adchkjkadbinogdbildimjodafocpmoa?utm_source=item-share-cb" target="_blank" rel="noopener noreferrer">
+                              <Eye className="w-5 h-5" />
+                              See Demo
+                            </a>
+                          </Button>
+                        )}
                         <span className="text-2xl font-bold text-primary">{extension.price}</span>
                       </div>
                       <p className="text-sm text-muted-foreground">
