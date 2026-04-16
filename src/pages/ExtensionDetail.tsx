@@ -9,10 +9,11 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
-import extProductivity from "@/assets/ext-productivity.png";
+import { pricingConfig } from "@/config/pricingConfig";
 import indiamartExtractorLogo from "@/assets/indiamart-extractor-logo.png";
 import indiamartPickerLogo from "@/assets/indiamart-picker-logo.png";
+
+
 
 interface Extension {
   id: string;
@@ -23,12 +24,9 @@ interface Extension {
   price: string;
   rating: number;
   users: string;
-  image: string;
   featured: boolean;
   benefits: string[];
   features: string[];
-  screenshots: string[];
-  pricingPlans?: { name: string; badge: string; badgeColor: string; price: string; period: string; features: string[]; popular: boolean }[];
 }
 
 const extensionsData: Record<string, Extension> = {
@@ -41,7 +39,6 @@ const extensionsData: Record<string, Extension> = {
     price: "Free",
     rating: 4.7,
     users: "500+",
-    image: indiamartExtractorLogo,
     featured: true,
     benefits: [
       "One-click lead extraction from IndiaMART",
@@ -58,8 +55,7 @@ const extensionsData: Record<string, Extension> = {
       "Secure local data storage",
       "Bulk lead extraction support",
       "Clean and user-friendly interface"
-    ],
-    screenshots: []
+    ]
   },
   "indiamart-lead-picker": {
     id: "indiamart-lead-picker",
@@ -70,7 +66,6 @@ const extensionsData: Record<string, Extension> = {
     price: "Free",
     rating: 4.8,
     users: "1.5K+",
-    image: indiamartPickerLogo,
     featured: true,
     benefits: [
       "Real-time lead auto-accept system",
@@ -87,37 +82,7 @@ const extensionsData: Record<string, Extension> = {
       "Smart filtering for targeted leads",
       "One-click data capture",
       "Lightweight and fast performance"
-    ],
-    screenshots: [],
-    pricingPlans: [
-      {
-        name: "Starter",
-        badge: "BASIC",
-        badgeColor: "bg-muted text-muted-foreground",
-        price: "₹2,000",
-        period: "/yr",
-        features: ["200 Leads year", "Direct Page Extraction", "Standard Business Support"],
-        popular: false,
-      },
-      {
-        name: "Bronze Pro",
-        badge: "MOST POPULAR",
-        badgeColor: "bg-hero text-primary-foreground",
-        price: "₹5,000",
-        period: "/yr",
-        features: ["700 Total Leads", "Priority Multi-Filters", "Premium Priority Support", "Advanced Matching"],
-        popular: true,
-      },
-      {
-        name: "Gold",
-        badge: "ULTIMATE",
-        badgeColor: "bg-accent text-accent-foreground",
-        price: "₹10,000",
-        period: "/yr",
-        features: ["1250 Total Leads", "All Advanced Filters", "24/7 VIP Dedicated Support", "Bulk Export Tools"],
-        popular: false,
-      },
-    ],
+    ]
   }
 };
 
@@ -138,6 +103,7 @@ const ExtensionDetail = () => {
   const navigate = useNavigate();
   const extension = id ? extensionsData[id] : null;
   const [selectedPlan, setSelectedPlan] = useState<string>("");
+  const pricingPlans = pricingConfig[id || ""];
 
   if (!extension) {
     return (
@@ -177,20 +143,18 @@ const ExtensionDetail = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <div className="relative">
-                <div className="w-full aspect-square max-w-md mx-auto rounded-3xl bg-gradient-to-br from-primary/10 via-accent/10 to-primary/10 flex items-center justify-center overflow-hidden glow">
-                  <img
-                    src={extension.image}
-                    alt={extension.name}
-                    className="w-48 h-48 object-contain"
-                  />
-                </div>
-                {extension.featured && (
-                  <Badge className="absolute top-6 right-6 bg-hero text-primary-foreground border-0 text-sm px-4 py-1">
-                    Popular
-                  </Badge>
-                )}
-              </div>
+              {extension.featured && (
+                <Badge className="absolute top-6 right-6 bg-hero text-primary-foreground border-0 text-sm px-4 py-1">
+                  Popular
+                </Badge>
+              )}
+              <img 
+                src={extension.id === "indiamart-lead-extractor" 
+                  ? indiamartExtractorLogo 
+                  : indiamartPickerLogo} 
+                alt={extension.name}
+                className="w-full h-auto max-w-[280px] mx-auto"
+              />
             </motion.div>
 
             <motion.div
@@ -223,7 +187,7 @@ const ExtensionDetail = () => {
               </div>
 
               <div className="bg-card rounded-2xl p-6 shadow-card mb-8">
-                {extension.pricingPlans && extension.pricingPlans.length > 0 ? (
+                {pricingPlans && pricingPlans.length > 0 ? (
                   <>
                     <p className="text-sm text-muted-foreground mb-4">Select a plan:</p>
                     <RadioGroup 
@@ -231,7 +195,7 @@ const ExtensionDetail = () => {
                       onValueChange={setSelectedPlan}
                       className="space-y-3 mb-6"
                     >
-                      {extension.pricingPlans.map((plan) => (
+                      {pricingPlans.map((plan) => (
                         <div key={plan.name} className="flex items-center justify-between p-4 border rounded-xl cursor-pointer hover:bg-accent/10 transition-colors">
                           <div className="flex items-center gap-3">
                             <RadioGroupItem value={plan.name} id={plan.name} />
@@ -245,22 +209,37 @@ const ExtensionDetail = () => {
                         </div>
                       ))}
                     </RadioGroup>
-                    <Button
-                      size="lg"
-                      className="w-full bg-hero text-primary-foreground hover:opacity-90 transition-opacity gap-2"
-                      disabled={!selectedPlan}
-                      asChild
-                    >
-                      <Link to={`/?ext=${extension.id}&plan=${encodeURIComponent(selectedPlan)}#checkout`}>
-                        <Download className="w-5 h-5" />
-                        Buy Now
-                      </Link>
-                    </Button>
+                    <div className="flex gap-3">
+                      <Button
+                        size="lg"
+                        className="flex-1 bg-hero text-primary-foreground hover:opacity-90 transition-opacity gap-2"
+                        disabled={!selectedPlan}
+                        asChild
+                      >
+                        <Link to={`/?ext=${extension.id}&plan=${encodeURIComponent(selectedPlan)}#checkout`}>
+                          <Download className="w-5 h-5" />
+                          Buy Now
+                        </Link>
+                      </Button>
+                      {(extension.id === "indiamart-lead-picker" || extension.id === "indiamart-lead-extractor") && (
+                        <Button
+                          size="lg"
+                          variant="outline"
+                          className="gap-2 px-8 border-primary text-primary hover:bg-primary/10"
+                          asChild
+                        >
+                          <a href={extension.id === "indiamart-lead-picker" ? "https://chromewebstore.google.com/detail/hcfiebeeafdnffpfhfjeoppjhighcnfd?utm_source=item-share-cb" : "https://chromewebstore.google.com/detail/adchkjkadbinogdbildimjodafocpmoa?utm_source=item-share-cb"} target="_blank" rel="noopener noreferrer">
+                            <Eye className="w-5 h-5" />
+                            See Demo
+                          </a>
+                        </Button>
+                      )}
+                    </div>
                   </>
                 ) : (
                   <>
-                    <div className="flex items-center justify-between mb-6">
-                      <div className="flex items-center gap-4">
+                    <div className="mb-6">
+                      <div className="flex items-center gap-4 mb-4">
                         <Button
                           size="lg"
                           className="bg-hero text-primary-foreground hover:opacity-90 transition-opacity gap-2 px-8"
@@ -271,20 +250,22 @@ const ExtensionDetail = () => {
                             Buy Now
                           </Link>
                         </Button>
-                        {extension.id === "indiamart-lead-extractor" && (
+                        {(extension.id === "indiamart-lead-extractor" || extension.id === "indiamart-lead-picker") && (
                           <Button
                             size="lg"
                             variant="outline"
                             className="gap-2 px-8 border-primary text-primary hover:bg-primary/10"
                             asChild
                           >
-                            <a href="https://chromewebstore.google.com/detail/adchkjkadbinogdbildimjodafocpmoa?utm_source=item-share-cb" target="_blank" rel="noopener noreferrer">
+                            <a href={extension.id === "indiamart-lead-picker" ? "https://chromewebstore.google.com/detail/hcfiebeeafdnffpfhfjeoppjhighcnfd?utm_source=item-share-cb" : "https://chromewebstore.google.com/detail/adchkjkadbinogdbildimjodafocpmoa?utm_source=item-share-cb"} target="_blank" rel="noopener noreferrer">
                               <Eye className="w-5 h-5" />
                               See Demo
                             </a>
                           </Button>
                         )}
-                        <span className="text-2xl font-bold text-primary">{extension.price}</span>
+                      </div>
+                      <div className="mb-3">
+                        <span className="text-xl font-bold text-primary">Price: {extension.price}</span>
                       </div>
                       <p className="text-sm text-muted-foreground">
                         30-day money-back guarantee • Cancel anytime
@@ -297,7 +278,7 @@ const ExtensionDetail = () => {
               </motion.div>
           </div>
 
-          {(extension.benefits || extension.features || extension.pricingPlans) && (
+          {(extension.benefits || extension.features || pricingPlans) && (
             <div className="mt-16">
               <div className="grid lg:grid-cols-3 gap-6">
                 {extension.benefits && extension.benefits.length > 0 && (
@@ -328,14 +309,14 @@ const ExtensionDetail = () => {
                   </div>
                 )}
 
-                {extension.pricingPlans && extension.pricingPlans.length > 0 && (
+                {pricingPlans && pricingPlans.length > 0 && (
                   <div className="bg-card rounded-2xl p-6 shadow-card">
                     <div className="flex items-center gap-2 mb-6">
                       <Tag className="w-5 h-5 text-accent" />
                       <h3 className="text-xl font-bold">Pricing</h3>
                     </div>
                     <div className="space-y-4">
-                      {extension.pricingPlans.map((plan, index) => (
+                      {pricingPlans.map((plan, index) => (
                         <div 
                           key={plan.name} 
                           className={`relative rounded-xl p-4 border-2 transition-all duration-300 hover:shadow-lg ${

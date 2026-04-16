@@ -3,39 +3,9 @@ import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { pricingConfig } from "@/config/pricingConfig";
 
-const plans = [
-  {
-    name: "Starter",
-    badge: "BASIC",
-    badgeColor: "bg-muted text-muted-foreground",
-    price: "₹2,000",
-    period: "/yr",
-    description: "Perfect for individual users",
-    features: ["200 Leads year", "Direct Page Extraction", "Standard Business Support"],
-    popular: false,
-  },
-  {
-    name: "Bronze Pro",
-    badge: "MOST POPULAR",
-    badgeColor: "bg-hero text-primary-foreground",
-    price: "₹5,000",
-    period: "/yr",
-    description: "Best for power users",
-    features: ["700 Total Leads", "Priority Multi-Filters", "Premium Priority Support", "Advanced Matching"],
-    popular: true,
-  },
-  {
-    name: "Gold",
-    badge: "ULTIMATE",
-    badgeColor: "bg-accent text-accent-foreground",
-    price: "₹10,000",
-    period: "/yr",
-    description: "For teams and organizations",
-    features: ["1250 Total Leads", "All Advanced Filters", "24/7 VIP Dedicated Support", "Bulk Export Tools"],
-    popular: false,
-  },
-];
+const plans = pricingConfig["indiamart-lead-picker"] || [];
 
 const PricingSection = () => (
   <section id="pricing" className="py-20">

@@ -64,14 +64,14 @@ const ShowcaseSection = () => (
               </Badge>
             )}
 
-            <div className={`rounded-2xl flex items-center justify-center mb-3 overflow-hidden group-hover:scale-110 transition-transform duration-300 w-16 h-16 bg-secondary`}>
+            <div className={`rounded-0xl flex items-center justify-center mb-2 overflow-hidden group-hover:scale-110 transition-transform duration-300 w-16 h-16`}>
               <img
                 src={ext.image}
                 alt={ext.name}
                 width={48}
                 height={48}
                 loading="lazy"
-                className="w-12 h-12 object-contain"
+                className="w-15 h-15 object-contain"
               />
             </div>
 
