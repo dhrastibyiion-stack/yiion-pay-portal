@@ -79,18 +79,8 @@ const ShowcaseSection = () => (
             <h3 className="font-semibold text-lg mb-2">{ext.name}</h3>
             <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">{ext.desc}</p>
 
-            {ext.pricingPlans && (
-              <div className="grid grid-cols-3 gap-2 mb-4">
-                {ext.pricingPlans.map((plan, i) => (
-                  <div key={plan.name} className="flex flex-col items-center p-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors">
-                    <plan.icon className={`w-5 h-5 ${plan.color} mb-1`} />
-                    <span className="text-xs font-medium">{plan.price}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-            <h3 className="font-semibold text-lg mb-2">{ext.name}</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">{ext.desc}</p>
+
+
 
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-1">
