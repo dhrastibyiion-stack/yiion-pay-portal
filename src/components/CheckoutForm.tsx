@@ -23,10 +23,6 @@ const extensionPrices: Record<string, { name: string; price: string; category: s
     { name: "Bronze Pro", price: "₹5,000", period: "/yr" },
     { name: "Gold", price: "₹10,000", period: "/yr" }
   ]},
-  "privacyvault": { name: "PrivacyVault", price: "Free", category: "Privacy" },
-  "themecraft": { name: "ThemeCraft", price: "Free", category: "Customization" },
-  "devinspect": { name: "DevInspect", price: "Free", category: "Developer Tools" },
-  "cloudsync": { name: "CloudSync", price: "Free", category: "Data Management" },
 };
 
 const availableExtensions = Object.entries(extensionPrices).map(([id, data]) => ({

@@ -1,15 +1,10 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, Shield, Zap, Gem } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
 import extSecurity from "@/assets/ext-security.png";
-import extProductivity from "@/assets/ext-productivity.png";
-import extPrivacy from "@/assets/ext-privacy.png";
-import extCustom from "@/assets/ext-custom.png";
-import extDevtools from "@/assets/ext-devtools.png";
-import extData from "@/assets/ext-data.png";
 import indiamartExtractorLogo from "@/assets/indiamart-extractor-logo.png";
 import indiamartPickerLogo from "@/assets/indiamart-picker-logo.png";
 
@@ -24,6 +19,11 @@ const extensions = [
     users: "500+",
     image: indiamartExtractorLogo,
     featured: true,
+    pricingPlans: [
+      { name: "Starter", price: "₹2,000/yr", icon: Shield, color: "text-primary" },
+      { name: "Bronze", price: "₹5,000/yr", icon: Zap, color: "text-hero" },
+      { name: "Gold", price: "₹10,000/yr", icon: Gem, color: "text-accent" },
+    ],
   },
   {
     id: "indiamart-lead-picker",
@@ -35,50 +35,11 @@ const extensions = [
     users: "1.5K+",
     image: indiamartPickerLogo,
     featured: true,
-  },
-  {
-    id: "privacyvault",
-    name: "PrivacyVault",
-    category: "Privacy",
-    desc: "Block trackers, hide your digital fingerprint, and browse anonymously.",
-    price: "",
-    rating: 4.8,
-    users: "15K+",
-    image: extPrivacy,
-    featured: false,
-  },
-  {
-    id: "themecraft",
-    name: "ThemeCraft",
-    category: "Customization",
-    desc: "Personalize any website with custom themes, fonts, and color palettes.",
-    price: "",
-    rating: 4.6,
-    users: "6K+",
-    image: extCustom,
-    featured: false,
-  },
-  {
-    id: "devinspect",
-    name: "DevInspect",
-    category: "Developer Tools",
-    desc: "Enhanced inspector, network monitor, and performance profiling for developers.",
-    price: "",
-    rating: 4.9,
-    users: "10K+",
-    image: extDevtools,
-    featured: true,
-  },
-  {
-    id: "cloudsync",
-    name: "CloudSync",
-    category: "Data Management",
-    desc: "Seamlessly sync bookmarks, settings, and data across all your browsers.",
-    price: "",
-    rating: 4.5,
-    users: "9K+",
-    image: extData,
-    featured: false,
+    pricingPlans: [
+      { name: "Starter", price: "₹2,000/yr", icon: Shield, color: "text-primary" },
+      { name: "Bronze", price: "₹5,000/yr", icon: Zap, color: "text-hero" },
+      { name: "Gold", price: "₹10,000/yr", icon: Gem, color: "text-accent" },
+    ],
   },
 ];
 
@@ -113,7 +74,7 @@ const ShowcaseSection = () => (
               </Badge>
             )}
 
-            <div className={`rounded-2xl flex items-center justify-center mb-5 overflow-hidden group-hover:scale-110 transition-transform duration-300 w-16 h-16 bg-secondary`}>
+            <div className={`rounded-2xl flex items-center justify-center mb-3 overflow-hidden group-hover:scale-110 transition-transform duration-300 w-16 h-16 bg-secondary`}>
               <img
                 src={ext.image}
                 alt={ext.name}
@@ -125,6 +86,19 @@ const ShowcaseSection = () => (
             </div>
 
             <span className="text-xs font-medium text-accent mb-1">{ext.category}</span>
+            <h3 className="font-semibold text-lg mb-2">{ext.name}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">{ext.desc}</p>
+
+            {ext.pricingPlans && (
+              <div className="grid grid-cols-3 gap-2 mb-4">
+                {ext.pricingPlans.map((plan, i) => (
+                  <div key={plan.name} className="flex flex-col items-center p-2 rounded-lg bg-secondary/50 hover:bg-secondary transition-colors">
+                    <plan.icon className={`w-5 h-5 ${plan.color} mb-1`} />
+                    <span className="text-xs font-medium">{plan.price}</span>
+                  </div>
+                ))}
+              </div>
+            )}
             <h3 className="font-semibold text-lg mb-2">{ext.name}</h3>
             <p className="text-sm text-muted-foreground leading-relaxed mb-4 flex-1">{ext.desc}</p>
 

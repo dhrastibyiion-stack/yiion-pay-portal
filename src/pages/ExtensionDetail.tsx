@@ -1,17 +1,16 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Star, Check, Download, Shield, Zap, Eye, Palette, Code, Cloud, Users } from "lucide-react";
+import { ArrowLeft, Star, Check, Download, Shield, Zap, Eye, Palette, Code, Cloud, Users, CreditCard, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 import extProductivity from "@/assets/ext-productivity.png";
-import extPrivacy from "@/assets/ext-privacy.png";
-import extCustom from "@/assets/ext-custom.png";
-import extDevtools from "@/assets/ext-devtools.png";
-import extData from "@/assets/ext-data.png";
 import indiamartExtractorLogo from "@/assets/indiamart-extractor-logo.png";
 import indiamartPickerLogo from "@/assets/indiamart-picker-logo.png";
 
@@ -119,122 +118,6 @@ const extensionsData: Record<string, Extension> = {
         popular: false,
       },
     ],
-  },
-  "privacyvault": {
-    id: "privacyvault",
-    name: "PrivacyVault",
-    category: "Privacy",
-    shortDesc: "Block trackers, hide your digital fingerprint, and browse anonymously.",
-    fullDesc: "PrivacyVault gives you complete control over your digital footprint. Block invasive trackers, mask your fingerprint, and browse with complete anonymity. Your data stays private with military-grade encryption and zero-knowledge architecture.",
-    price: "Free",
-    rating: 4.8,
-    users: "15K+",
-    image: extPrivacy,
-    featured: false,
-    benefits: [
-      "Complete tracker blocking",
-      "Digital fingerprint masking",
-      "Incognito mode enhancement",
-      "Data breach monitoring",
-      "Cookie auto-deletion",
-      "VPN integration support"
-    ],
-    features: [
-      "Block list management",
-      "Fingerprint randomization",
-      "Canvas blocking",
-      "Referrer spoofing",
-      "User-agent rotation",
-      "Script blocking"
-    ],
-    screenshots: []
-  },
-  "themecraft": {
-    id: "themecraft",
-    name: "ThemeCraft",
-    category: "Customization",
-    shortDesc: "Personalize any website with custom themes, fonts, and color palettes.",
-    fullDesc: "ThemeCraft transforms your browsing experience with endless customization options. Apply stunning themes to any website, customize fonts and colors, and create your perfect visual environment. Express yourself with complete design control.",
-    price: "Free",
-    rating: 4.6,
-    users: "6K+",
-    image: extCustom,
-    featured: false,
-    benefits: [
-      "Apply themes to any website",
-      "Custom font integration",
-      "Color palette customization",
-      "Dark/light mode switching",
-      "Theme sharing community",
-      "Per-site settings"
-    ],
-    features: [
-      "Theme editor",
-      "CSS injection",
-      "Font manager",
-      "Color picker",
-      "Preset library",
-      "Import/export themes"
-    ],
-    screenshots: []
-  },
-  "devinspect": {
-    id: "devinspect",
-    name: "DevInspect",
-    category: "Developer Tools",
-    shortDesc: "Enhanced inspector, network monitor, and performance profiling for developers.",
-    fullDesc: "DevInspect supercharges your development workflow with powerful browser developer tools. Monitor network requests in real-time, profile performance bottlenecks, and inspect elements with advanced capabilities. Built for developers who demand more.",
-    price: "Free",
-    rating: 4.9,
-    users: "10K+",
-    image: extDevtools,
-    featured: true,
-    benefits: [
-      "Advanced element inspector",
-      "Real-time network monitoring",
-      "Performance profiling",
-      "API debugging tools",
-      "Code snippet storage",
-      "Console enhancements"
-    ],
-    features: [
-      "DOM tree visualizer",
-      "Request/response viewer",
-      "Memory profiler",
-      "API tester",
-      "Cookie manager",
-      "Local storage editor"
-    ],
-    screenshots: []
-  },
-  "cloudsync": {
-    id: "cloudsync",
-    name: "CloudSync",
-    category: "Data Management",
-    shortDesc: "Seamlessly sync bookmarks, settings, and data across all your browsers.",
-    fullDesc: "CloudSync keeps your browsing data perfectly synchronized across all your devices and browsers. Never lose a bookmark again with automatic cloud backup, cross-device sync, and secure encrypted storage for all your browsing data.",
-    price: "Free",
-    rating: 4.5,
-    users: "9K+",
-    image: extData,
-    featured: false,
-    benefits: [
-      "Cross-browser sync",
-      "Automatic bookmark backup",
-      "Settings synchronization",
-      "History sync",
-      "Password sync",
-      "Encrypted cloud storage"
-    ],
-    features: [
-      "Selective sync",
-      "Conflict resolution",
-      "Offline mode",
-      "Import/export",
-      "Share folders",
-      "Sync history"
-    ],
-    screenshots: []
   }
 };
 
@@ -254,6 +137,7 @@ const ExtensionDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const extension = id ? extensionsData[id] : null;
+  const [selectedPlan, setSelectedPlan] = useState<string>("");
 
   if (!extension) {
     return (
@@ -376,7 +260,7 @@ const ExtensionDetail = () => {
                 ) : (
                   <>
                     <div className="flex items-center justify-between mb-6">
-                      <div>
+                      <div className="flex items-center gap-4">
                         <Button
                           size="lg"
                           className="bg-hero text-primary-foreground hover:opacity-90 transition-opacity gap-2 px-8"
@@ -387,29 +271,103 @@ const ExtensionDetail = () => {
                             Buy Now
                           </Link>
                         </Button>
+                        <span className="text-2xl font-bold text-primary">{extension.price}</span>
                       </div>
-                    <p className="text-sm text-muted-foreground">
-                      30-day money-back guarantee • Cancel anytime
-                    </p>
+                      <p className="text-sm text-muted-foreground">
+                        30-day money-back guarantee • Cancel anytime
+                      </p>
+                    </div>
                   </>
-                ))}
-            {extension.pricingPlans && extension.pricingPlans.length > 0 ? (
-              <p className="text-sm text-muted-foreground">
-                Select a plan above to continue
-              </p>
-            ) : (
-              <Button
-                size="lg"
-                className="bg-hero text-primary-foreground hover:opacity-90 transition-opacity gap-2 px-10"
-                asChild
-              >
-                <Link to={`/?ext=${extension.id}#checkout`}>
-                  <Download className="w-5 h-5" />
-                  Buy Now
-                </Link>
-              </Button>
-))
-            </motion.div>
+                )}
+              </div>
+
+              </motion.div>
+          </div>
+
+          {(extension.benefits || extension.features || extension.pricingPlans) && (
+            <div className="mt-16">
+              <div className="grid lg:grid-cols-3 gap-6">
+                {extension.benefits && extension.benefits.length > 0 && (
+                  <div className="bg-card rounded-2xl p-6 shadow-card">
+                    <h3 className="text-xl font-bold mb-4">Benefits</h3>
+                    <ul className="space-y-3">
+                      {extension.benefits.map((benefit, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
+                          <span className="text-muted-foreground">{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {extension.features && extension.features.length > 0 && (
+                  <div className="bg-card rounded-2xl p-6 shadow-card">
+                    <h3 className="text-xl font-bold mb-4">Features</h3>
+                    <ul className="space-y-3">
+                      {extension.features.map((feature, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                          <Check className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" />
+                          <span className="text-muted-foreground">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {extension.pricingPlans && extension.pricingPlans.length > 0 && (
+                  <div className="bg-card rounded-2xl p-6 shadow-card">
+                    <div className="flex items-center gap-2 mb-6">
+                      <Tag className="w-5 h-5 text-accent" />
+                      <h3 className="text-xl font-bold">Pricing</h3>
+                    </div>
+                    <div className="space-y-4">
+                      {extension.pricingPlans.map((plan, index) => (
+                        <div 
+                          key={plan.name} 
+                          className={`relative rounded-xl p-4 border-2 transition-all duration-300 hover:shadow-lg ${
+                            plan.popular 
+                              ? 'border-accent bg-accent/5' 
+                              : 'border-border hover:border-accent/50'
+                          }`}
+                        >
+                          {plan.popular && (
+                            <Badge className={`${plan.badgeColor} border-0 text-xs absolute -top-3 left-1/2 -translate-x-1/2`}>
+                              {plan.badge}
+                            </Badge>
+                          )}
+                          <div className="flex items-center justify-between mb-3">
+                            <h4 className="font-bold">{plan.name}</h4>
+                            <div>
+                              <span className="text-xl font-bold text-primary">{plan.price}</span>
+                              <span className="text-sm text-muted-foreground">{plan.period}</span>
+                            </div>
+                          </div>
+                          <ul className="space-y-1 mb-3">
+                            {plan.features.map((feature, i) => (
+                              <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <Check className="w-3 h-3 text-green-500 flex-shrink-0" />
+                                <span>{feature}</span>
+                              </li>
+                            ))}
+                          </ul>
+                          <Button 
+                            className={`w-full text-sm ${plan.popular ? 'bg-hero text-primary-foreground' : 'bg-secondary text-primary'}`}
+                            onClick={() => {
+                              setSelectedPlan(plan.name);
+                              document.getElementById('checkout')?.scrollIntoView({ behavior: 'smooth' });
+                            }}
+                          >
+                            Select
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       </motion.div>
 
