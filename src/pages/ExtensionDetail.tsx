@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Star, Check, Download, Shield, Zap, Eye, Palette, Code, Cloud, Users, CreditCard, Tag } from "lucide-react";
+import { ArrowLeft, Star, Check, Download, Shield, Zap, Eye, Palette, Code, Cloud, Users, CreditCard, Tag, ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,6 +12,14 @@ import Footer from "@/components/Footer";
 import { pricingConfig } from "@/config/pricingConfig";
 import indiamartExtractorLogo from "@/assets/indiamart-extractor-logo.png";
 import indiamartPickerLogo from "@/assets/indiamart-picker-logo.png";
+import leadExtractor1 from "@/pages/lead extractor/e1.png";
+import leadExtractor2 from "@/pages/lead extractor/e2.png";
+import leadExtractor3 from "@/pages/lead extractor/e3.png";
+import leadExtractor4 from "@/pages/lead extractor/e4.png";
+import leadPicker1 from "@/pages/extension lead picker/l1.png";
+import leadPicker2 from "@/pages/extension lead picker/l2.png";
+import leadPicker3 from "@/pages/extension lead picker/l3.png";
+import leadPicker4 from "@/pages/extension lead picker/l4.png";
 
 
 
@@ -36,7 +44,7 @@ const extensionsData: Record<string, Extension> = {
     category: "Tools",
     shortDesc: "Export and manage leads directly from IndiaMART platform with ease.",
     fullDesc: "IndiaMART Lead Extractor Pro is a powerful Chrome extension that helps businesses extract, organize, and export leads directly from the IndiaMART platform with ease. With one-click extraction and seamless Excel export, it eliminates manual data entry and ensures you never lose valuable customer information. Designed for sales teams, marketers, and business owners, it helps you manage leads efficiently and stay productive.",
-    price: "Free",
+    price: " Price :Free of cost ",
     rating: 4.7,
     users: "500+",
     featured: true,
@@ -103,7 +111,33 @@ const ExtensionDetail = () => {
   const navigate = useNavigate();
   const extension = id ? extensionsData[id] : null;
   const [selectedPlan, setSelectedPlan] = useState<string>("");
+  const [currentImage, setCurrentImage] = useState<number>(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(true);
   const pricingPlans = pricingConfig[id || ""];
+
+  const extractorImages = [leadExtractor1, leadExtractor2, leadExtractor3, leadExtractor4];
+  const pickerImages = [leadPicker1, leadPicker2, leadPicker3, leadPicker4];
+  const extensionImages = extension?.id === "indiamart-lead-extractor" ? extractorImages : pickerImages;
+
+  const goToNext = () => {
+    setCurrentImage((prev) => (prev + 1) % extensionImages.length);
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 5000);
+  };
+
+  const goToPrev = () => {
+    setCurrentImage((prev) => (prev - 1 + extensionImages.length) % extensionImages.length);
+    setIsAutoPlaying(false);
+    setTimeout(() => setIsAutoPlaying(true), 5000);
+  };
+
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % extensionImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [extensionImages.length, isAutoPlaying]);
 
   if (!extension) {
     return (
@@ -144,17 +178,46 @@ const ExtensionDetail = () => {
               transition={{ duration: 0.5 }}
             >
               {extension.featured && (
-                <Badge className="absolute top-6 right-6 bg-hero text-primary-foreground border-0 text-sm px-4 py-1">
+                <Badge className="absolute top-6 right-6 z-10 bg-hero text-primary-foreground border-0 text-sm px-4 py-1">
                   Popular
                 </Badge>
               )}
-              <img 
-                src={extension.id === "indiamart-lead-extractor" 
-                  ? indiamartExtractorLogo 
-                  : indiamartPickerLogo} 
-                alt={extension.name}
-                className="w-full h-auto max-w-[280px] mx-auto"
-              />
+              <div className="relative w-full aspect-[4/3] max-w-[800px] mx-auto overflow-hidden rounded-2xl shadow-xl">
+                {extensionImages.map((img, index) => (
+                  <motion.img
+                    key={index}
+                    src={img}
+                    alt={`Screenshot ${index + 1}`}
+                    className="absolute inset-0 w-full h-full object-contain bg-black/5"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: index === currentImage ? 1 : 0 }}
+                    transition={{ duration: 0.5 }}
+                  />
+                ))}
+                <button
+                  onClick={goToPrev}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-colors"
+                >
+                  <ChevronLeft className="w-6 h-6 text-gray-800" />
+                </button>
+                <button
+                  onClick={goToNext}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-colors"
+                >
+                  <ChevronRight className="w-6 h-6 text-gray-800" />
+                </button>
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3">
+                  {extensionImages.map((_, index) => (
+                    <div
+                      key={index}
+                      className={`w-3 h-3 rounded-full transition-all cursor-pointer ${
+                        index === currentImage ? "bg-white scale-110" : "bg-white/40"
+                      }`}
+                      onClick={() => setCurrentImage(index)}
+                    />
+                  ))}
+                </div>
+              </div>
             </motion.div>
 
             <motion.div
@@ -265,11 +328,8 @@ const ExtensionDetail = () => {
                         )}
                       </div>
                       <div className="mb-3">
-                        <span className="text-xl font-bold text-primary">Price: {extension.price}</span>
+                        <span className="text-xl font-bold text-primary">{extension.price}</span>
                       </div>
-                      <p className="text-sm text-muted-foreground">
-                        30-day money-back guarantee • Cancel anytime
-                      </p>
                     </div>
                   </>
                 )}

@@ -18,10 +18,10 @@ const paymentMethods = ["Card", "UPI", "Net Banking", "Cash"] as const;
 
 const extensionPrices: Record<string, { name: string; price: string; category: string; hasPlans?: boolean; plans?: { name: string; price: string; period: string }[] }> = {
   "indiamart-lead-extractor": { name: "IndiaMART Lead Extractor", price: "Free", category: "Tools" },
-  "indiamart-lead-picker": { name: "IndiaMART Lead Picker", price: "₹2,000/yr", category: "Productivity", hasPlans: true, plans: [
-    { name: "Starter", price: "₹2,000", period: "/yr" },
-    { name: "Bronze Pro", price: "₹5,000", period: "/yr" },
-    { name: "Gold", price: "₹10,000", period: "/yr" }
+  "indiamart-lead-picker": { name: "IndiaMART Lead Picker", price: "From ₹8,000", category: "Productivity", hasPlans: true, plans: [
+    { name: "Starter", price: "₹8,000", period: "" },
+    { name: "Bronze Pro", price: "₹20,000", period: "" },
+    { name: "Gold", price: "₹40,000", period: "" }
   ]},
 };
 
