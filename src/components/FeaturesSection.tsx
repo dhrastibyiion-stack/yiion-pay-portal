@@ -9,7 +9,7 @@ const features = [
 ];
 
 const FeaturesSection = () => (
-  <section id="features" className="py-20">
+  <section id="features" className="py-20 bg-secondary/50">
     <div className="container">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
