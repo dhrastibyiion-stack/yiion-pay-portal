@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Search, ShoppingCart, ShieldCheck, Zap } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const steps = [
   { icon: Search, title: "Browse Extensions", desc: "Explore our marketplace of digital extensions" },
@@ -31,16 +32,19 @@ const AboutSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="relative flex flex-col items-center"
           >
-            <div className="w-16 h-16 rounded-2xl bg-hero flex items-center justify-center mb-5">
-              <step.icon className="w-7 h-7 text-primary-foreground" />
-            </div>
-            <span className="absolute -top-2 -left-2 w-8 h-8 rounded-full bg-accent/20 text-accent font-bold text-sm flex items-center justify-center">
-              {i + 1}
-            </span>
-            <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
-            <p className="text-sm text-muted-foreground">{step.desc}</p>
+            <Card className="w-full h-full group hover:shadow-2xl hover:shadow-hero/10 transition-all duration-300 border-0 bg-card hover:bg-card/80 relative overflow-hidden">
+              <CardHeader className="pb-2 pt-14">
+                <div className="absolute top-4 left-4 w-10 h-10 rounded-xl bg-hero group-hover:scale-110 transition-transform flex items-center justify-center z-10 shadow-lg">
+                  <step.icon className="w-6 h-6 text-primary-foreground" />
+                </div>
+
+                <CardTitle className="font-bold text-xl group-hover:text-primary mb-1">{i + 1}. {step.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="pt-0 pb-6">
+                <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
+              </CardContent>
+            </Card>
           </motion.div>
         ))}
       </div>

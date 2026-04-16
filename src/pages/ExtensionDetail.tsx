@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Star, Check, Download, Shield, Zap, Eye, Palette, Code, Cloud, Users, CreditCard, Tag, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, Star, Check, Download, Shield, Zap, Eye, Palette, Code, Cloud, Users, CreditCard, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -44,7 +44,7 @@ const extensionsData: Record<string, Extension> = {
     category: "Tools",
     shortDesc: "Export and manage leads directly from IndiaMART platform with ease.",
     fullDesc: "IndiaMART Lead Extractor Pro is a powerful Chrome extension that helps businesses extract, organize, and export leads directly from the IndiaMART platform with ease. With one-click extraction and seamless Excel export, it eliminates manual data entry and ensures you never lose valuable customer information. Designed for sales teams, marketers, and business owners, it helps you manage leads efficiently and stay productive.",
-    price: " Price :Free of cost ",
+    price: " Price :Free  ",
     rating: 4.7,
     users: "500+",
     featured: true,
@@ -111,8 +111,8 @@ const ExtensionDetail = () => {
   const navigate = useNavigate();
   const extension = id ? extensionsData[id] : null;
   const [selectedPlan, setSelectedPlan] = useState<string>("");
-  const [currentImage, setCurrentImage] = useState<number>(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState<boolean>(true);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const pricingPlans = pricingConfig[id || ""];
 
   const extractorImages = [leadExtractor1, leadExtractor2, leadExtractor3, leadExtractor4];
@@ -120,13 +120,13 @@ const ExtensionDetail = () => {
   const extensionImages = extension?.id === "indiamart-lead-extractor" ? extractorImages : pickerImages;
 
   const goToNext = () => {
-    setCurrentImage((prev) => (prev + 1) % extensionImages.length);
+    setCurrentImageIndex((prev) => (prev + 1) % extensionImages.length);
     setIsAutoPlaying(false);
     setTimeout(() => setIsAutoPlaying(true), 5000);
   };
 
   const goToPrev = () => {
-    setCurrentImage((prev) => (prev - 1 + extensionImages.length) % extensionImages.length);
+    setCurrentImageIndex((prev) => (prev - 1 + extensionImages.length) % extensionImages.length);
     setIsAutoPlaying(false);
     setTimeout(() => setIsAutoPlaying(true), 5000);
   };
@@ -134,7 +134,7 @@ const ExtensionDetail = () => {
   useEffect(() => {
     if (!isAutoPlaying) return;
     const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % extensionImages.length);
+      setCurrentImageIndex((prev) => (prev + 1) % extensionImages.length);
     }, 5000);
     return () => clearInterval(interval);
   }, [extensionImages.length, isAutoPlaying]);
@@ -172,7 +172,7 @@ const ExtensionDetail = () => {
           </Button>
 
           <div className="grid lg:grid-cols-2 gap-12">
-            <motion.div
+              <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
@@ -182,38 +182,51 @@ const ExtensionDetail = () => {
                   Popular
                 </Badge>
               )}
-              <div className="relative w-full aspect-[4/3] max-w-[800px] mx-auto overflow-hidden rounded-2xl shadow-xl">
+              <div className="relative aspect-video overflow-hidden rounded-xl shadow-lg bg-muted">
                 {extensionImages.map((img, index) => (
-                  <motion.img
+                  <motion.div
                     key={index}
-                    src={img}
-                    alt={`Screenshot ${index + 1}`}
-                    className="absolute inset-0 w-full h-full object-contain bg-black/5"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: index === currentImage ? 1 : 0 }}
-                    transition={{ duration: 0.5 }}
-                  />
+                    className="absolute inset-0"
+                    initial={{ opacity: 0, x: 100 }}
+                    animate={{ 
+                      opacity: index === currentImageIndex ? 1 : 0, 
+                      x: index === currentImageIndex ? 0 : 100 
+                    }}
+                    transition={{ duration: 0.4 }}
+                    style={{ display: index === currentImageIndex ? 'block' : 'none' }}
+                  >
+                    <img
+                      src={img}
+                      alt={`Screenshot ${index + 1}`}
+                      className="w-full h-full object-contain"
+                    />
+                  </motion.div>
                 ))}
+                
                 <button
                   onClick={goToPrev}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-colors"
+                  className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-colors"
+                  aria-label="Previous image"
                 >
-                  <ChevronLeft className="w-6 h-6 text-gray-800" />
+                  ←
                 </button>
                 <button
                   onClick={goToNext}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg transition-colors"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 text-white flex items-center justify-center transition-colors"
+                  aria-label="Next image"
                 >
-                  <ChevronRight className="w-6 h-6 text-gray-800" />
+                  →
                 </button>
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-3">
+                
+                <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
                   {extensionImages.map((_, index) => (
-                    <div
+                    <button
                       key={index}
-                      className={`w-3 h-3 rounded-full transition-all cursor-pointer ${
-                        index === currentImage ? "bg-white scale-110" : "bg-white/40"
+                      onClick={() => setCurrentImageIndex(index)}
+                      className={`w-2 h-2 rounded-full transition-all ${
+                        index === currentImageIndex ? 'bg-white w-6' : 'bg-white/50'
                       }`}
-                      onClick={() => setCurrentImage(index)}
+                      aria-label={`Go to image ${index + 1}`}
                     />
                   ))}
                 </div>

@@ -26,7 +26,7 @@ const HeroSection = () => (
         </p>
         <div className="flex flex-wrap gap-4">
           <Button asChild size="lg" className="bg-hero text-primary-foreground hover:opacity-90 transition-opacity text-base px-8">
-            <a href="#pricing">Get Started</a>
+            <a href="#extensions">Get Started</a>
           </Button>
           <Button asChild variant="outline" size="lg" className="text-base px-8">
             <a href="#about">Learn More</a>
