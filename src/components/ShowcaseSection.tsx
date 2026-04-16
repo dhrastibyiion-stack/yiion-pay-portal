@@ -19,11 +19,6 @@ const extensions = [
     users: "500+",
     image: indiamartExtractorLogo,
     featured: true,
-    pricingPlans: [
-      { name: "Starter", price: "₹2,000/yr", icon: Shield, color: "text-primary" },
-      { name: "Bronze", price: "₹5,000/yr", icon: Zap, color: "text-hero" },
-      { name: "Gold", price: "₹10,000/yr", icon: Gem, color: "text-accent" },
-    ],
   },
   {
     id: "indiamart-lead-picker",
@@ -35,11 +30,6 @@ const extensions = [
     users: "1.5K+",
     image: indiamartPickerLogo,
     featured: true,
-    pricingPlans: [
-      { name: "Starter", price: "₹2,000/yr", icon: Shield, color: "text-primary" },
-      { name: "Bronze", price: "₹5,000/yr", icon: Zap, color: "text-hero" },
-      { name: "Gold", price: "₹10,000/yr", icon: Gem, color: "text-accent" },
-    ],
   },
 ];
 
